@@ -1,5 +1,5 @@
 const canvas = document.getElementById('drawing-board');
-const canvas = document.getElementById('toolbar');
+const toolbar = document.getElementById('toolbar');
 const ctx = canvas.getContext('2d');
 
 const canvasOffsetX = canvas.offsetLeft;
@@ -15,9 +15,41 @@ let startY;
 
 toolbar.addEventListener('click'), e => {
     if (e.target.id === 'clear') {
-        CSSTransition.clearRect(0,0, canvas.width, canvas.height);
+        ctx.clearRect(0,0, canvas.width, canvas.height);
     }
 }
 
-//6:01 thats where you left off in the video make sure to rewatch the video in it's entirity to better
-//understand what it is you are doing!
+toolbar.addEventListener('change', e => {
+    if(e.target.id === 'stroke') {
+        ctx.strokeStyle = e.target.value;
+    }
+    if(e.target.id === 'lineWidth') {
+        lineWidth = e.target.value;
+    }
+})
+
+const draw = (e) => {
+    if(!isPainting) {
+        return;
+    }
+
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    
+    ctx.lineTo(e.clientX - canvasOffsetX, e.clientY);
+    ctx.stroke();
+}
+
+canvas.addEventListener('mousedown', (e) => {
+    isPainting = true;
+    startX = e.clientX;
+    startY = e.clientY;
+})
+
+canvas.addEventListener('mouseup', e => {
+    isPainting = false;
+    ctx.stroke();
+    ctx.beginPath();
+})
+
+canvas.addEventListener('mousemove', draw);
