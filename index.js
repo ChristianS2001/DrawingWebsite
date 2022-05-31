@@ -13,11 +13,11 @@ let lineWidth = 5;
 let startX;
 let startY;
 
-toolbar.addEventListener('click'), e => {
+toolbar.addEventListener('click', e => {
     if (e.target.id === 'clear') {
         ctx.clearRect(0,0, canvas.width, canvas.height);
     }
-}
+})
 
 toolbar.addEventListener('change', e => {
     if(e.target.id === 'stroke') {
