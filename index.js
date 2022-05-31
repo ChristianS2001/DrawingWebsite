@@ -55,4 +55,4 @@ canvas.addEventListener('mouseup', e => {
 canvas.addEventListener('mousemove', draw);
 
 /*everything seems to be fixed for the CSS and html however it seems like javascript doesn't want to
-work today with CSS and HTML*/
+work today with CSS and HTML lol */
